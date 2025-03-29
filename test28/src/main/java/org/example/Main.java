@@ -43,10 +43,24 @@ public class Main {
         System.out.print("Измененный массив: ");
         printArray(array);
 
+// Задаем пустой целочисленный массив длиной 100
+        int[] array1 = new int[100];
 
+        // Заполняем массив значениями от 1 до 100
+        for (int i = 0; i < array1.length; i++) {
+            array1[i] = i + 1; // Заполняем элемент массива значением i + 1
+        }
+
+        // Печатаем заполненный массив
+        System.out.print("Заполненный массив: ");
+        printArray1(array1);
 
 
     }
+
+
+
+
     public static void printThreeWords(){
         System.out.println("Orange\nBanana\nApple");
     }
@@ -129,6 +143,14 @@ public class Main {
     }
     // Метод для печати массива
     public static void printArray(int[] array) {
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println(); // Переход на новую строку
+    }
+
+
+    public static void printArray1(int[] array) {
         for (int num : array) {
             System.out.print(num + " ");
         }
