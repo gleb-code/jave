@@ -19,6 +19,11 @@ public class Main {
         System.out.println(isNegative(3));    // Пример вызова метода с положительным числом    задание 7
         System.out.println(isNegative(0));    // Пример вызова метода с нулем   задание 7
         printString("Указанная строка!", 3);  // Пример вызова метода     задание 8
+        System.out.println(isLeapYear(2020)); // Пример вызова метода для високосного года  задание 9
+        System.out.println(isLeapYear(2021)); // Пример вызова метода для не високосного года   задание 9
+        System.out.println(isLeapYear(1900)); // Пример вызова метода для не високосного года   задание 9
+        System.out.println(isLeapYear(2000)); // Пример вызова метода для високосного года      задание 9
+
 
     }
     public static void printThreeWords(){
@@ -85,6 +90,22 @@ public class Main {
         for (int i = 0; i < times; i++) {
             System.out.println(text); // Печатаем строку
         }
+    }
+
+    public static boolean isLeapYear(int year) {
+        // Проверяем условия для високосного года
+        if (year % 400 == 0) {
+            return true; // Каждый 400-й год является високосным
+        } else if (year % 100 == 0) {
+            return false; // Каждый 100-й год не является високосным
+        } else if (year % 4 == 0) {
+            return true; // Каждый 4-й год является високосным
+        } else {
+            return false; // Все остальные годы не являются високосными
+        }
+
+
+
     }
 }
 
