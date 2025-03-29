@@ -26,6 +26,9 @@ public class Main {
         System.out.println(isLeapYear(2021)); // Пример вызова метода для не високосного года   задание 9
         System.out.println(isLeapYear(1900)); // Пример вызова метода для не високосного года   задание 9
         System.out.println(isLeapYear(2000)); // Пример вызова метода для високосного года      задание 9
+
+
+
         // Задаем целочисленный массив задание 10
         int[] array = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
 
@@ -70,7 +73,7 @@ public class Main {
         printArrayTask12(arrayTask12);
 
 
-        int size = 5; // Размерность массива (количество строк и столбцов)
+        int size = 4; // Размерность массива (количество строк и столбцов) задание 13
         int[][] arrayTask13 = new int[size][size]; // Создаем квадратный массив
 
         // Заполняем диагональные элементы единицами
@@ -83,7 +86,7 @@ public class Main {
         printArrayTask13(arrayTask13);
 
 
-        int len = 7; // Длина массива
+        int len = 7; // Длина массива задание 14
         int initialValue = 1; // Начальное значение
 
         int[] arrayTask14 = createArray(len, initialValue); // Создаем массив
