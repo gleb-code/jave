@@ -5,13 +5,20 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        printThreeWords();
-        checkSumSign();
-        printColor();
-        compareNumbers();
-        System.out.println(isSumInRange(50, -30));  // Пример вызова метода
-        System.out.println(isSumInRange(100, 91)); // Пример вызова метода
-        System.out.println(isSumInRange(3, -8));  // Пример вызова метода
+        printThreeWords(); //задание 1
+        checkSumSign();    // задание 2
+        printColor();       // задание 3
+        compareNumbers();   // задание 4
+        System.out.println(isSumInRange(50, -30));  // Пример вызова метода задание 5
+        System.out.println(isSumInRange(100, 91)); // Пример вызова метода  задание 5
+        System.out.println(isSumInRange(3, -8));  // Пример вызова метода   задание 5
+        checkNumber(5);   // Пример вызова метода с положительным числом    задание 6
+        checkNumber(-3);  // Пример вызова метода с отрицательным числом     задание 6
+        checkNumber(0);    // Пример вызова метода с нулем  задание 6
+        System.out.println(isNegative(-5));  // Пример вызова метода с отрицательным числом  задание 7
+        System.out.println(isNegative(3));    // Пример вызова метода с положительным числом    задание 7
+        System.out.println(isNegative(0));    // Пример вызова метода с нулем   задание 7
+        printString("Указанная строка!", 3);  // Пример вызова метода     задание 8
 
     }
     public static void printThreeWords(){
@@ -59,6 +66,25 @@ public class Main {
 
         // Проверяем, лежит ли сумма в диапазоне от 10 до 20 (включительно)
         return sum >= 10 && sum <= 20;
+    }
+
+
+    public static void checkNumber(int number) {
+        if (number >= 0) {
+            System.out.println(number + " - положительное число");
+        } else {
+            System.out.println(number + " - отрицательное число");
+        }
+    }
+
+    public static boolean isNegative(int number) {
+        return number < 0; // Возвращаем true, если число отрицательное
+    }
+
+    public static void printString(String text, int times) {
+        for (int i = 0; i < times; i++) {
+            System.out.println(text); // Печатаем строку
+        }
     }
 }
 
