@@ -9,6 +9,9 @@ public class Main {
         checkSumSign();
         printColor();
         compareNumbers();
+        System.out.println(isSumInRange(50, -30));  // Пример вызова метода
+        System.out.println(isSumInRange(100, 91)); // Пример вызова метода
+        System.out.println(isSumInRange(3, -8));  // Пример вызова метода
 
     }
     public static void printThreeWords(){
@@ -51,11 +54,12 @@ public class Main {
             System.out.println("a < b");
         }
     }
+    public static boolean isSumInRange(int a, int b) {
+        int sum = a + b; // Вычисляем сумму
 
-
-
-
-
+        // Проверяем, лежит ли сумма в диапазоне от 10 до 20 (включительно)
+        return sum >= 10 && sum <= 20;
+    }
 }
 
 
