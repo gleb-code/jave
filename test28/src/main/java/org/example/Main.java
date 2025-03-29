@@ -5,6 +5,9 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
+
+
+
         printThreeWords(); //задание 1
         checkSumSign();    // задание 2
         printColor();       // задание 3
@@ -23,6 +26,24 @@ public class Main {
         System.out.println(isLeapYear(2021)); // Пример вызова метода для не високосного года   задание 9
         System.out.println(isLeapYear(1900)); // Пример вызова метода для не високосного года   задание 9
         System.out.println(isLeapYear(2000)); // Пример вызова метода для високосного года      задание 9
+        // Задаем целочисленный массив задание 10
+        int[] array = {1, 1, 0, 0, 1, 0, 1, 1, 0, 0};
+
+        // Печатаем исходный массив
+        System.out.print("Исходный массив: ");
+        printArray(array);
+
+        // Заменяем 0 на 1 и 1 на 0
+        for (int i = 0; i < array.length; i++) {
+            // Используем тернарный оператор для замены значений
+            array[i] = (array[i] == 0) ? 1 : 0;
+        }
+
+        // Печатаем измененный массив
+        System.out.print("Измененный массив: ");
+        printArray(array);
+
+
 
 
     }
@@ -105,7 +126,13 @@ public class Main {
         }
 
 
-
+    }
+    // Метод для печати массива
+    public static void printArray(int[] array) {
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println(); // Переход на новую строку
     }
 }
 
