@@ -43,18 +43,53 @@ public class Main {
         System.out.print("Измененный массив: ");
         printArray(array);
 
-// Задаем пустой целочисленный массив длиной 100
-        int[] array1 = new int[100];
+// Задаем пустой целочисленный массив длиной 100 задание 11
+        int[] arrayTask11 = new int[100];
 
         // Заполняем массив значениями от 1 до 100
-        for (int i = 0; i < array1.length; i++) {
-            array1[i] = i + 1; // Заполняем элемент массива значением i + 1
+        for (int i = 0; i < arrayTask11.length; i++) {
+            arrayTask11[i] = i + 1; // Заполняем элемент массива значением i + 1
         }
 
         // Печатаем заполненный массив
         System.out.print("Заполненный массив: ");
-        printArray1(array1);
+        printArrayTask11(arrayTask11);
 
+        // Задаем массив  задание 12
+        int[] arrayTask12 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
+
+        // Проходим по массиву и умножаем числа меньше 6 на 2
+        for (int i = 0; i < arrayTask12.length; i++) {
+            if (arrayTask12[i] < 6) {
+                arrayTask12[i] *= 2; // Умножаем на 2
+            }
+        }
+
+        // Печатаем измененный массив
+        System.out.print("Измененный массив: ");
+        printArrayTask12(arrayTask12);
+
+
+        int size = 5; // Размерность массива (количество строк и столбцов)
+        int[][] arrayTask13 = new int[size][size]; // Создаем квадратный массив
+
+        // Заполняем диагональные элементы единицами
+        for (int i = 0; i < size; i++) {
+            arrayTask13[i][i] = 1; // Устанавливаем единицу на главной диагонали
+            arrayTask13[i][size - 1 - i] = 1; // Устанавливаем единицу на побочной диагонали
+        }
+
+        // Печатаем массив
+        printArrayTask13(arrayTask13);
+
+
+        int len = 7; // Длина массива
+        int initialValue = 1; // Начальное значение
+
+        int[] arrayTask14 = createArray(len, initialValue); // Создаем массив
+
+        // Печатаем массив
+        printArrayTask14(arrayTask14);
 
     }
 
@@ -150,12 +185,45 @@ public class Main {
     }
 
 
-    public static void printArray1(int[] array) {
+    public static void printArrayTask11(int[] array) {
         for (int num : array) {
             System.out.print(num + " ");
         }
         System.out.println(); // Переход на новую строку
     }
+
+
+    public static void printArrayTask12(int[] array) {
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println(); // Переход на новую строку
+    }
+    public static void printArrayTask13(int[][] array) {
+        for (int[] row : array) {
+            for (int num : row) {
+                System.out.print(num + " ");
+            }
+            System.out.println(); // Переход на новую строку
+        }
+    }
+    // Метод для создания массива
+    public static int[] createArray(int len, int initialValue) {
+        int[] array = new int[len]; // Создаем массив заданной длины
+        for (int i = 0; i < len; i++) {
+            array[i] = initialValue; // Заполняем массив значением initialValue
+        }
+        return array; // Возвращаем заполненный массив
+    }
+
+    // Метод для печати одномерного массива
+    public static void printArrayTask14(int[] array) {
+        for (int num : array) {
+            System.out.print(num + " ");
+        }
+        System.out.println(); // Переход на новую строку
+    }
+
 }
 
 
