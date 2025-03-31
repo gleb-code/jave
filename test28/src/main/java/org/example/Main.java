@@ -1,6 +1,7 @@
 package org.example;
-import java.util.*;
 
+
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,19 +14,19 @@ public class Main {
         printColor();       // задание 3
         compareNumbers();   // задание 4
         System.out.println(isSumInRange(50, -30));  // Пример вызова метода задание 5
-        System.out.println(isSumInRange(100, 91)); // Пример вызова метода  задание 5
-        System.out.println(isSumInRange(3, -8));  // Пример вызова метода   задание 5
-        checkNumber(5);   // Пример вызова метода с положительным числом    задание 6
-        checkNumber(-3);  // Пример вызова метода с отрицательным числом     задание 6
-        checkNumber(0);    // Пример вызова метода с нулем  задание 6
-        System.out.println(isNegative(-5));  // Пример вызова метода с отрицательным числом  задание 7
-        System.out.println(isNegative(3));    // Пример вызова метода с положительным числом    задание 7
-        System.out.println(isNegative(0));    // Пример вызова метода с нулем   задание 7
-        printString("Указанная строка!", 3);  // Пример вызова метода     задание 8
-        System.out.println(isLeapYear(2020)); // Пример вызова метода для високосного года  задание 9
-        System.out.println(isLeapYear(2021)); // Пример вызова метода для не високосного года   задание 9
-        System.out.println(isLeapYear(1900)); // Пример вызова метода для не високосного года   задание 9
-        System.out.println(isLeapYear(2000)); // Пример вызова метода для високосного года      задание 9
+        System.out.println(isSumInRange(100, 91)); // Пример вызова метода задание 5
+        System.out.println(isSumInRange(3, -8));  // Пример вызова метода задание 5
+        checkNumber(5);   // Пример вызова метода с положительным числом задание 6
+        checkNumber(-3);  // Пример вызова метода с отрицательным числом задание 6
+        checkNumber(0);    // Пример вызова метода с нулем задание 6
+        System.out.println(isNegative(-5));  // Пример вызова метода с отрицательным числом задание 7
+        System.out.println(isNegative(3));    // Пример вызова метода с положительным числом задание 7
+        System.out.println(isNegative(0));    // Пример вызова метода с нулем задание 7
+        printString("Указанная строка!", 3);  // Пример вызова метода задание 8
+        System.out.println(isLeapYear(2019)); // Пример вызова метода для високосного года задание 9
+        System.out.println(isLeapYear(2021)); // Пример вызова метода для не високосного года задание 9
+        System.out.println(isLeapYear(1900)); // Пример вызова метода для не високосного года задание 9
+        System.out.println(isLeapYear(2000)); // Пример вызова метода для високосного года задание 9
 
 
 
@@ -58,7 +59,7 @@ public class Main {
         System.out.print("Заполненный массив: ");
         printArrayTask11(arrayTask11);
 
-        // Задаем массив  задание 12
+        // Задаем массив задание 12
         int[] arrayTask12 = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
 
         // Проходим по массиву и умножаем числа меньше 6 на 2
@@ -104,7 +105,7 @@ public class Main {
     }
 
     public static void checkSumSign() {
-        int a = 5;  // Инициализация переменной a
+        int a = 5;  // Инициализация переменной а
         int b = -3; // Инициализация переменной b
 
         int sum = a + b; // Считаем сумму
@@ -130,7 +131,7 @@ public class Main {
     }
 
     public static void compareNumbers() {
-        int a = 10; // Инициализация переменной a
+        int a = 1; // Инициализация переменной а
         int b = 5;  // Инициализация переменной b
 
         if (a >= b) {
@@ -169,13 +170,10 @@ public class Main {
         // Проверяем условия для високосного года
         if (year % 400 == 0) {
             return true; // Каждый 400-й год является високосным
-        } else if (year % 100 == 0) {
+        } else // Все остальные годы не являются високосными
+            if (year % 100 == 0) {
             return false; // Каждый 100-й год не является високосным
-        } else if (year % 4 == 0) {
-            return true; // Каждый 4-й год является високосным
-        } else {
-            return false; // Все остальные годы не являются високосными
-        }
+        } else return year % 4 == 0; // Каждый 4-й год является високосным
 
 
     }
@@ -213,9 +211,8 @@ public class Main {
     // Метод для создания массива
     public static int[] createArray(int len, int initialValue) {
         int[] array = new int[len]; // Создаем массив заданной длины
-        for (int i = 0; i < len; i++) {
-            array[i] = initialValue; // Заполняем массив значением initialValue
-        }
+        // Заполняем массив значением initialValue
+        Arrays.fill(array, initialValue);
         return array; // Возвращаем заполненный массив
     }
 
