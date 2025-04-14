@@ -24,66 +24,61 @@ public class Main {
                 {"13", "14", "15", "16"}
         };
 
-        String[][] invalidDataArray = {
+        String[][] invalidSizeArray = {
+                {"1", "2", "3"},
+                {"5", "6", "7"},
+                {"9", "10", "11"}
+        };
+
+        String[][] unevenArray = {
                 {"1", "2", "3", "4"},
-                {"5", "6", "seven", "8"},
+                {"5", "6", "7", "8"},
+                {"9", "10", "11"},
+                {"13", "14", "15", "16"}
+        };
+
+        String[][] invalidDataArray = {
+                {"1", "2", "three", "4"},
+                {"5", "6", "7", "8"},
                 {"9", "10", "11", "12"},
                 {"13", "14", "15", "16"}
         };
 
-        String[][] invalidSizeArray = {
-                {"1", "2", "3"},
-                {"4", "5", "6"},
-                {"7", "8", "9"}
-        };
+        // Проверяем корректные и некорректные массивы
+        checkArray(validArray);
+        checkArray(invalidSizeArray);
+        checkArray(unevenArray);
+        checkArray(invalidDataArray);
 
-        // Обработка валидного массива
+        // Генерация ArrayIndexOutOfBoundsException
         try {
-            int result = processArray(validArray);
-            System.out.println("Сумма элементов массива: " + result);
-        } catch (MyArraySizeException | MyArrayDataException e) {
-            System.out.println(e.getMessage());
-        }
-
-        // Обработка массива с неверными данными
-        try {
-            int result = processArray(invalidDataArray);
-            System.out.println("Сумма элементов массива: " + result);
-        } catch (MyArraySizeException | MyArrayDataException e) {
-            System.out.println(e.getMessage());
-        }
-
-        // Обработка массива с неверным размером
-        try {
-            int result = processArray(invalidSizeArray);
-            System.out.println("Сумма элементов массива: " + result);
-        } catch (MyArraySizeException | MyArrayDataException e) {
-            System.out.println(e.getMessage());
-        }
-
-        // Генерация массива и ловля ArrayIndexOutOfBoundsException
-        String[][] generatedArray = new String[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                generatedArray[i][j] = String.valueOf(i * 4 + j + 1);
-            }
-        }
-
-        try {
-            // Попробуем получить элемент за пределами массива
-            System.out.println(generatedArray[1][4]);
+            int[] numbers = {1, 2, 3};
+            System.out.println(numbers[4]); // Попытка доступа к несуществующему индексу
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Ошибка: выход за пределы массива.");
+            System.out.println("Ошибка: " + e.getMessage());
+        }
+    }
+
+    public static void checkArray(String[][] array) {
+        try {
+            int sum = processArray(array);
+            System.out.println("Сумма элементов массива: " + sum);
+        } catch (MyArraySizeException | MyArrayDataException e) {
+            System.out.println("Ошибка: " + e.getMessage());
         }
     }
 
     public static int processArray(String[][] array) throws MyArraySizeException, MyArrayDataException {
-        if (array.length != 4 || array[0].length != 4) {
-            throw new MyArraySizeException("Размер массива должен быть 4x4.");
+        if (array.length != 4) {
+            throw new MyArraySizeException("Размер массива должен быть 4 строки.");
+        }
+        for (String[] row : array) {
+            if (row.length != 4) {
+                throw new MyArraySizeException("Каждая строка должна содержать 4 элемента.");
+            }
         }
 
         int sum = 0;
-
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 try {
@@ -93,7 +88,6 @@ public class Main {
                 }
             }
         }
-
         return sum;
     }
 }
