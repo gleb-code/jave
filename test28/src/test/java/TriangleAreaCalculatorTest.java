@@ -1,38 +1,45 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.example.TriangleAreaCalculator;
 
-import org.junit.jupiter.api.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class TriangleAreaCalculatorTest {
 
     @Test
-    public void testAreaOfValidTriangle() {
-        assertEquals(6.0, TriangleAreaCalculator.calculateArea(3, 4, 5), 0.0001);
-        assertEquals(14.6969, TriangleAreaCalculator.calculateArea(5, 6, 7), 0.0001); // Исправлено
-        assertEquals(24.0, TriangleAreaCalculator.calculateArea(6, 8, 10), 0.0001); // Исправлено
+    public void testCalculateAreaValidTriangle() {
+        Assert.assertEquals(TriangleAreaCalculator.calculateArea(3, 4, 5), 6.0, 1e-9);
+        Assert.assertEquals(TriangleAreaCalculator.calculateArea(5, 5, 5), 10.825317547305486, 1e-9); // равносторонний треугольник
+        Assert.assertEquals(TriangleAreaCalculator.calculateArea(7, 8, 9), 26.832815729997478, 1e-9);
     }
 
     @Test
-    public void testAreaOfTriangleWithInvalidSides() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            TriangleAreaCalculator.calculateArea(1, 1, 3);
-        });
-        assertEquals("Стороны не могут образовать треугольник.", exception.getMessage());
+    public void testCalculateAreaInvalidTriangle() {
+        try {
+            TriangleAreaCalculator.calculateArea(1, 2, 3);
+            Assert.fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals(e.getMessage(), "Стороны не могут образовать треугольник.");
+        }
 
-        exception = assertThrows(IllegalArgumentException.class, () -> {
-            TriangleAreaCalculator.calculateArea(0, 1, 1);
-        });
-        assertEquals("Стороны не могут образовать треугольник.", exception.getMessage());
+        try {
+            TriangleAreaCalculator.calculateArea(-1, 2, 3);
+            Assert.fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals(e.getMessage(), "Стороны не могут образовать треугольник.");
+        }
 
-        exception = assertThrows(IllegalArgumentException.class, () -> {
-            TriangleAreaCalculator.calculateArea(-1, 1, 1);
-        });
-        assertEquals("Стороны не могут образовать треугольник.", exception.getMessage());
-    }
+        try {
+            TriangleAreaCalculator.calculateArea(0, 2, 3);
+            Assert.fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals(e.getMessage(), "Стороны не могут образовать треугольник.");
+        }
 
-    @Test
-    public void testAreaOfTriangleWithEqualSides() {
-        assertEquals(3.897114317, TriangleAreaCalculator.calculateArea(3, 3, 3), 0.0001); // Равносторонний треугольник
+        try {
+            TriangleAreaCalculator.calculateArea(2, 2, 5);
+            Assert.fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals(e.getMessage(), "Стороны не могут образовать треугольник.");
+        }
     }
 }

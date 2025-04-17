@@ -1,48 +1,48 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-import org.example.ArithmeticOperations;
 
+
+import org.example.ArithmeticOperations;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class ArithmeticOperationsTest {
+    @BeforeClass
+    public void setUp() {
+        // Здесь можно выполнить инициализацию, если это необходимо
+    }
 
     @Test
     public void testAdd() {
-        // Проверка сложения
-        assertEquals(5, ArithmeticOperations.add(2, 3), "2 + 3 должно быть 5");
-        assertEquals(-1, ArithmeticOperations.add(2, -3), "2 + -3 должно быть -1");
-        assertEquals(0, ArithmeticOperations.add(0, 0), "0 + 0 должно быть 0");
-        assertEquals(10, ArithmeticOperations.add(7, 3), "7 + 3 должно быть 10");
+        Assert.assertEquals(ArithmeticOperations.add(2, 3), 5);
+        Assert.assertEquals(ArithmeticOperations.add(-1, 1), 0);
+        Assert.assertEquals(ArithmeticOperations.add(-1, -1), -2);
     }
 
     @Test
     public void testSubtract() {
-        // Проверка вычитания
-        assertEquals(-1, ArithmeticOperations.subtract(2, 3), "2 - 3 должно быть -1");
-        assertEquals(5, ArithmeticOperations.subtract(2, -3), "2 - -3 должно быть 5");
-        assertEquals(0, ArithmeticOperations.subtract(0, 0), "0 - 0 должно быть 0");
-        assertEquals(4, ArithmeticOperations.subtract(10, 6), "10 - 6 должно быть 4");
+        Assert.assertEquals(ArithmeticOperations.subtract(5, 3), 2);
+        Assert.assertEquals(ArithmeticOperations.subtract(0, 1), -1);
+        Assert.assertEquals(ArithmeticOperations.subtract(-1, -1), 0);
     }
 
     @Test
     public void testMultiply() {
-        // Проверка умножения
-        assertEquals(6, ArithmeticOperations.multiply(2, 3), "2 * 3 должно быть 6");
-        assertEquals(-6, ArithmeticOperations.multiply(2, -3), "2 * -3 должно быть -6");
-        assertEquals(0, ArithmeticOperations.multiply(0, 5), "0 * 5 должно быть 0");
-        assertEquals(15, ArithmeticOperations.multiply(5, 3), "5 * 3 должно быть 15");
+        Assert.assertEquals(ArithmeticOperations.multiply(2, 3), 6);
+        Assert.assertEquals(ArithmeticOperations.multiply(-1, 1), -1);
+        Assert.assertEquals(ArithmeticOperations.multiply(-1, -1), 1);
     }
 
     @Test
     public void testDivide() {
-        // Проверка деления
-        assertEquals(2.0, ArithmeticOperations.divide(6, 3), "6 / 3 должно быть 2.0");
-        assertEquals(-2.0, ArithmeticOperations.divide(6, -3), "6 / -3 должно быть -2.0");
-        assertEquals(0.0, ArithmeticOperations.divide(0, 5), "0 / 5 должно быть 0.0");
+        Assert.assertEquals(ArithmeticOperations.divide(6, 3), 2.0);
+        Assert.assertEquals(ArithmeticOperations.divide(5, 2), 2.5);
 
-        // Проверка деления на ноль
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+        // Проверка на исключение при делении на ноль
+        try {
             ArithmeticOperations.divide(1, 0);
-        });
-        assertEquals("Деление на ноль невозможно.", exception.getMessage());
+            Assert.fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+            Assert.assertEquals(e.getMessage(), "Деление на ноль невозможно.");
+        }
     }
 }
