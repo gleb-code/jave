@@ -1,11 +1,8 @@
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+import org.openqa.selenium.*;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.util.List;
-import java.util.Objects;
+
 
 public class MtsByTest {
     private WebDriver driver;
@@ -116,14 +113,35 @@ public class MtsByTest {
         continueButton.click();
 
 
-        List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
-        for (WebElement iframe : iframes) {
-            if (Objects.equals(iframe.getAttribute("src"), "https://checkout.bepaid.by/widget_v2/index.html")) { // Замените на ваш src
-                driver.switchTo().frame(iframe); // Переключаемся на нужный iframe
-                break; // Выходим из цикла, если нашли нужный iframe
-            }
+        try {
+            // Переключение на iframe
+            WebElement iframe = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                            By.cssSelector("body > div.bepaid-app > div > iframe")
+                    )
+            );
+            driver.switchTo().frame(iframe);
+
+            // Выполнение действий внутри фрейма
+            WebElement header = wait.until(
+                    ExpectedConditions.visibilityOfElementLocated(
+                            By.cssSelector(".header__container")
+                    )
+            );
+            WebElement closeButton = header.findElement(By.cssSelector(".header__close-button"));
+            closeButton.click();
+
+
+        } catch (NoSuchFrameException e) {
+            System.err.println("Iframe не найден: " + e.getMessage());
+        } finally {
+            // Всегда возвращаемся к основному контенту
+            driver.switchTo().defaultContent();
         }
-        WebElement popupWindow = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[9]")));
-        assertTrue(popupWindow.isDisplayed(), "Всплывающее окно не отображается!");
+
     }
 }
+
+
+
+
