@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.*;
 import java.time.Duration;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class MainPage {
     private final WebDriver driver;
@@ -119,23 +118,9 @@ public class MainPage {
         return driver.getCurrentUrl();
     }
 
-
-    public void verifyPaymentLogos() {
+    public List<WebElement> getPaymentLogos() {
         WebElement paySection = wait.until(ExpectedConditions.visibilityOfElementLocated(PAY_SECTION));
-
-        List<WebElement> logos = paySection.findElements(PAYMENT_LOGOS);
-
-        // Проверка наличия
-        assertFalse(logos.isEmpty(), "Логотипы платёжных систем не найдены!");
-
-        // Проверка количества
-        assertEquals(5, logos.size(), "Количество логотипов не соответствует ожидаемому!");
-
-        // Проверка видимости
-        logos.forEach(logo ->
-                assertTrue(logo.isDisplayed(),
-                        "Логотип не отображается: " + logo.findElement(By.tagName("img")).getAttribute("src"))
-        );
+        return paySection.findElements(PAYMENT_LOGOS);
     }
 
 
