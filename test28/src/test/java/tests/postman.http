@@ -1,0 +1,294 @@
+GET /get?foo1=bar1&foo2=bar2 HTTP/1.1
+Host: postman-echo.com
+
+
+
+// 1. Проверка кода ответа
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// 2. Полная проверка тела ответа
+pm.test("Exact response body match", function() {
+    // Ожидаемая структура ответа
+    const expectedResponse = {
+        args: {
+            foo1: "bar1",
+            foo2: "bar2"
+        },
+        headers: {
+            host: "postman-echo.com",
+            "x-request-start": pm.response.json().headers["x-request-start"], // Динамическое поле
+            connection: "close",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "x-amzn-trace-id": pm.response.json().headers["x-amzn-trace-id"], // Динамическое поле
+            "user-agent": "PostmanRuntime/7.43.3",
+            accept: "*/*",
+            "cache-control": "no-cache",
+            "postman-token": pm.response.json().headers["postman-token"], // Динамическое поле
+            cookie: pm.response.json().headers["cookie"] // Динамическое поле
+        },
+        url: "https://postman-echo.com/get?foo1=bar1&foo2=bar2"
+    };
+
+    // Глубокое сравнение
+    pm.expect(pm.response.json()).to.deep.eql(expectedResponse);
+});
+
+
+// Проверка кода статуса
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// Проверка наличия всех ожидаемых полей в ответе
+pm.test("Response has correct structure", function() {
+    const response = pm.response.json();
+    pm.expect(response).to.be.an('object').that.has.all.keys(
+        'args', 'data', 'files', 'form', 'headers', 'json', 'url'
+    );
+});
+pm.test("Data field contains correct JSON", function() {
+    const response = pm.response.json();
+
+    // Проверяем, что data является строкой
+    pm.expect(response.data).to.be.a('string');
+
+    // Парсим и проверяем содержимое
+    const parsedData = JSON.parse(response.data);
+    pm.expect(parsedData).to.deep.equal({
+        test: "value"
+    });
+
+    // Альтернативно - сравнение со отправленными данными
+    const requestBody = JSON.parse(pm.request.body.raw);
+    pm.expect(parsedData).to.deep.equal(requestBody);
+});
+// 1. Проверка кода ответа
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// 2. Полное сравнение тела ответа
+pm.test("Full response body match", function() {
+    // Получаем актуальный ответ
+    const actualResponse = pm.response.json();
+
+    // Задаем ОЖИДАЕМЫЙ ответ (все поля!)
+    const expectedResponse = {
+        "args": {},
+        "data": "{\n    \"test\": \"value\"\n}",
+        "files": {},
+        "form": {},
+        "headers": {
+            "host": "postman-echo.com",
+            "x-request-start": actualResponse.headers["x-request-start"], // Динамическое поле
+            "connection": "close",
+            "content-length": "23",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "x-amzn-trace-id": actualResponse.headers["x-amzn-trace-id"], // Динамическое поле
+            "content-type": "text/plain",
+            "user-agent": "PostmanRuntime/7.43.3",
+            "accept": "*/*",
+            "cache-control": "no-cache",
+            "postman-token": actualResponse.headers["postman-token"], // Динамическое поле
+            "accept-encoding": "gzip, deflate, br",
+            "cookie": actualResponse.headers["cookie"] // Динамическое поле
+        },
+        "json": null,
+        "url": "https://postman-echo.com/post"
+    };
+
+    // Глубокое сравнение
+    pm.expect(actualResponse).to.deep.eql(expectedResponse);
+});
+
+
+// 1. Проверка кода ответа
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// 2. Полная проверка тела ответа
+pm.test("Complete response body validation", function() {
+    // Получаем актуальный ответ
+    const actualResponse = pm.response.json();
+
+    // Формируем ожидаемую структуру ответа
+    const expectedResponse = {
+        args: {},
+        data: "",
+        files: {},
+        form: {
+            foo1: "bar1",
+            foo2: "bar2"
+        },
+        headers: {
+            host: "postman-echo.com",
+            "x-request-start": actualResponse.headers["x-request-start"], // Динамическое поле
+            connection: "close",
+            "content-length": "19",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "x-amzn-trace-id": actualResponse.headers["x-amzn-trace-id"], // Динамическое поле
+            "user-agent": "PostmanRuntime/7.43.3",
+            accept: "*/*",
+            "cache-control": "no-cache",
+            "postman-token": actualResponse.headers["postman-token"], // Динамическое поле
+            "accept-encoding": "gzip, deflate, br",
+            cookie: actualResponse.headers["cookie"], // Динамическое поле
+            "content-type": "application/x-www-form-urlencoded"
+        },
+        json: {
+            foo1: "bar1",
+            foo2: "bar2"
+        },
+        url: "https://postman-echo.com/post"
+    };
+
+    // Глубокое сравнение всего ответа
+    pm.expect(actualResponse).to.deep.eql(expectedResponse);
+});
+
+// 1. Проверка кода ответа
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// 2. Полная проверка тела ответа
+pm.test("Complete response body validation", function() {
+    // Получаем актуальный ответ
+    const actualResponse = pm.response.json();
+
+    // Формируем ожидаемую структуру ответа
+    const expectedResponse = {
+        args: {},
+        data: "This is expected to be sent back as part of response body.",
+        files: {},
+        form: {},
+        headers: {
+            host: "postman-echo.com",
+            "x-request-start": actualResponse.headers["x-request-start"], // Динамическое поле
+            connection: "close",
+            "content-length": "58",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "x-amzn-trace-id": actualResponse.headers["x-amzn-trace-id"], // Динамическое поле
+            "content-type": "text/plain",
+            "user-agent": "PostmanRuntime/7.43.3",
+            accept: "*/*",
+            "cache-control": "no-cache",
+            "postman-token": actualResponse.headers["postman-token"], // Динамическое поле
+            "accept-encoding": "gzip, deflate, br",
+            cookie: actualResponse.headers["cookie"] // Динамическое поле
+        },
+        json: null,
+        url: "https://postman-echo.com/put"
+    };
+
+    // Глубокое сравнение всего ответа
+    pm.expect(actualResponse).to.deep.eql(expectedResponse);
+});
+
+
+// 1. Проверка кода ответа
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// 2. Полная проверка тела ответа с динамическими полями
+pm.test("Complete response validation", function() {
+    const response = pm.response.json();
+
+    // Ожидаемая структура (статическая часть)
+    const expected = {
+        args: {},
+        data: "This is expected to be sent back as part of response body.",
+        files: {},
+        form: {},
+        headers: {
+            host: "postman-echo.com",
+            connection: "close",
+            "content-length": "58",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "content-type": "text/plain",
+            "user-agent": "PostmanRuntime/7.43.3",
+            accept: "*/*",
+            "cache-control": "no-cache",
+            "accept-encoding": "gzip, deflate, br"
+        },
+        json: null,
+        url: "https://postman-echo.com/patch"
+    };
+
+    // Динамические поля (копируем из ответа)
+    expected.headers["x-request-start"] = response.headers["x-request-start"];
+    expected.headers["x-amzn-trace-id"] = response.headers["x-amzn-trace-id"];
+    expected.headers["postman-token"] = response.headers["postman-token"];
+    expected.headers["cookie"] = response.headers["cookie"];
+
+    // Глубокое сравнение
+    pm.expect(response).to.deep.eql(expected);
+});
+
+
+// 1. Проверка кода ответа (для DELETE обычно 200 или 204)
+pm.test("Status code is 200", function() {
+    pm.response.to.have.status(200);
+});
+
+// 2. Полная проверка тела ответа с обработкой динамических полей
+pm.test("Complete response body validation", function() {
+    const actualResponse = pm.response.json();
+
+    // Создаем ожидаемую структуру ответа
+    const expectedResponse = {
+        args: {},
+        data: "This is expected to be sent back as part of response body.",
+        files: {},
+        form: {},
+        headers: {
+            host: "postman-echo.com",
+            "x-request-start": actualResponse.headers["x-request-start"], // Динамическое поле
+            connection: "close",
+            "content-length": "58",
+            "x-forwarded-proto": "https",
+            "x-forwarded-port": "443",
+            "x-amzn-trace-id": actualResponse.headers["x-amzn-trace-id"], // Динамическое поле
+            "content-type": "text/plain",
+            "user-agent": "PostmanRuntime/7.43.3",
+            accept: "*/*",
+            "cache-control": "no-cache",
+            "postman-token": actualResponse.headers["postman-token"], // Динамическое поле
+            "accept-encoding": "gzip, deflate, br",
+            cookie: actualResponse.headers["cookie"] // Динамическое поле
+        },
+        json: null,
+        url: "https://postman-echo.com/delete"
+    };
+
+    // Глубокое сравнение всех полей
+    pm.expect(actualResponse).to.deep.eql(expectedResponse);
+});
+
+// 3. Дополнительные проверки для DELETE-запроса
+pm.test("DELETE-specific checks", function() {
+    const res = pm.response.json();
+
+    // Проверка, что данные не были модифицированы
+    pm.expect(res.data).to.equal("This is expected to be sent back as part of response body.");
+
+    // Проверка отсутствия возвращаемых данных в json
+    pm.expect(res.json).to.be.null;
+
+    // Проверка URL
+    pm.expect(res.url).to.include("delete");
+});
+
+// 4. Проверка производительности
+pm.test("Response time is acceptable", function() {
+    pm.expect(pm.response.responseTime).to.be.below(500); // <500ms
+});
